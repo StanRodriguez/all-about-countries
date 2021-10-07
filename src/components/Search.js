@@ -14,32 +14,32 @@ class Search extends Component {
       selectedOption: null,
       countries,
       selectedCountry: {},
-      isGettingData: true
+      isGettingData: true,
     };
   }
   componentDidMount = () => {
     if (this.props.match.params.code) {
       const code = this.props.match.params.code.toUpperCase();
-      countries.forEach(country => {
+      countries.forEach((country) => {
         if (country.value === code) {
           this.setState({
-            selectedOption: country
+            selectedOption: country,
           });
         }
       });
     }
   };
-  handleChange = selectedOption => {
+  handleChange = (selectedOption) => {
     this.setState({ selectedOption });
   };
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     e.preventDefault() ? e.preventDefault() : (e = null);
     const response = await axios(
       COUNTRIES_API_URL + this.state.selectedOption.value
     );
     this.setState({
       selectedCountry: response.data,
-      isGettingData: false
+      isGettingData: false,
     });
   };
 
